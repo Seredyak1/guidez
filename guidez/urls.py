@@ -16,11 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_swagger.views import get_swagger_view
+from rest_framework_jwt.views import obtain_jwt_token
 
 schema_view = get_swagger_view(title='Pastebin API')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
+    path('swagger/', schema_view),
 
+    path('api-token-auth/', obtain_jwt_token),
+    path('users/', include('users.urls')),
+
+    path('api-auth/', include('rest_framework.urls')),
 ]
