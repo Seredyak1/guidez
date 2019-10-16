@@ -47,7 +47,11 @@ INSTALLED_APPS = [
     'django_celery_beat',
 
     'email_servise.apps.EmailServiseConfig',
-    'users.apps.UsersConfig'
+    'users.apps.UsersConfig',
+    'blog.apps.BlogConfig',
+    'guide_profile.apps.GuideProfileConfig',
+    'order.apps.OrderConfig',
+    'pages.apps.PagesConfig',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +84,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'guidez.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases

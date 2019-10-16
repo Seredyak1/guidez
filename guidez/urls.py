@@ -26,6 +26,9 @@ urlpatterns = [
 
     path('api-token-auth/', obtain_jwt_token),
     path('users/', include('users.urls')),
+    path('profile/', include('guide_profile.urls')),
+    path('blogs/', include('blog.urls')),
+    path('order/', include('order.urls')),
 
     path('api-auth/', include('rest_framework.urls')),
 ]
