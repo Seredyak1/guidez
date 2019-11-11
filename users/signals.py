@@ -8,7 +8,7 @@ from guide_profile.models import GuideProfile
 def create_blog_for_new_user(sender, created, instance, **kwargs):
     """Signal to create personal blog for new User"""
     if created:
-        profile = GuideProfile.objects.create(user=instance)
+        profile = GuideProfile.objects.create(auth_user=instance)
         user = User
         profile.first_name = user.first_name
         profile.last_name = user.last_name
