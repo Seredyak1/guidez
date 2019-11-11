@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.utils.safestring import mark_safe
 
 from django.contrib.auth.models import User
 
@@ -26,14 +27,14 @@ class GuideProfile(models.Model):
     auth_user = models.OneToOneField(User, on_delete=models.CASCADE, null=False, blank=False)
     first_name = models.CharField(max_length=256, null=False, blank=False)
     last_name = models.CharField(max_length=256, null=False, blank=False)
-    date_of_birth = models.DateField(null=False, blank=False)
-    phone = models.CharField(max_length=256, null=False, blank=False)
-    email = models.EmailField(max_length=256, null=False, blank=False)
-    personal_description = models.CharField(max_length=256, null=False, blank=False)
-    language = models.ManyToManyField(Language, related_name='profile_languages', null=False, blank=False)
+    date_of_birth = models.DateField(null=True, blank=True)
+    phone = models.CharField(max_length=256, null=True, blank=True)
+    email = models.EmailField(max_length=256, null=True, blank=True)
+    personal_description = models.TextField(null=True, blank=True)
+    language = models.ManyToManyField(Language, related_name='profile_languages', null=True, blank=True)
 
-    validation_image = models.ImageField(upload_to='media/profile_validation')
-    profile_image = models.ImageField(upload_to=f'media/{id}/')
+    validation_image = models.ImageField(upload_to='profile_validation')
+    profile_image = models.ImageField(upload_to=f'{str(id)}/')
 
     is_valid = models.BooleanField(default=False)
 
