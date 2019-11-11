@@ -4,5 +4,6 @@ from .views import *
 
 
 urlpatterns = [
-    path('', GuideProfileAPIView.as_view()),
+    path('<int:pk>/', GuideProfileAPIView.as_view()),
+    path('', GuideProfileListAPIView.as_view()),
 ]
