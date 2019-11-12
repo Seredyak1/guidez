@@ -32,6 +32,8 @@ class GuideProfile(models.Model):
     email = models.EmailField(max_length=256, null=True, blank=True)
     personal_description = models.TextField(null=True, blank=True)
     language = models.ManyToManyField(Language, related_name='profile_languages', null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
 
     validation_image = models.ImageField(upload_to='profile_validation')
     profile_image = models.ImageField(upload_to=f'{str(id)}/')
@@ -46,3 +48,19 @@ class GuideProfile(models.Model):
 
     # def validation_success_mail(self):
     #     return
+
+
+class GuideProfileFeedback(models.Model):
+
+    class Meta:
+        verbose_name_plural = _('Відгуки про гідів')
+
+    profile = models.ForeignKey(GuideProfile, on_delete=models.CASCADE, null=False, blank=False)
+    name = models.CharField(max_length=256, null=False, blank=False)
+    body = models.TextField(null=False, blank=False)
+    publish = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.profile} - {self.name}"

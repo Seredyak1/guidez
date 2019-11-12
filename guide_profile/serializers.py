@@ -18,7 +18,15 @@ class GuideProfileSerializer(serializers.ModelSerializer):
 
 
 class GuideProfileListSerializer(serializers.ModelSerializer):
-    """Serializer for GuideProfile, use for current register User"""
+    """Serializer for GuideProfile, use for profiles list"""
     class Meta:
         model = GuideProfile
         fields = ('id', 'first_name', 'last_name', 'profile_image', 'language')
+
+
+class GuideProfileFeedbackSerializer(serializers.ModelSerializer):
+    """Serializer for GuideProfileFeedback"""
+    class Meta:
+        model = GuideProfileFeedback
+        fields = '__all__'
+        read_only_fields = ('profile', 'published',)
