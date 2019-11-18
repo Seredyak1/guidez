@@ -64,3 +64,19 @@ class GuideProfileFeedback(models.Model):
 
     def __str__(self):
         return f"{self.profile} - {self.name}"
+
+
+class GuidePersonalTour(models.Model):
+    class Meta:
+        verbose_name_plural = "Персональні екскурсії"
+
+    profile = models.ForeignKey(GuideProfile, on_delete=models.CASCADE, null=False, blank=False)
+    title = models.TextField(null=False, blank=False)
+    body = models.TextField(null=False, blank=False)
+    duration = models.FloatField(null=False, blank=False)
+    price = models.FloatField(null=False, blank=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.profile} - {self.title}"

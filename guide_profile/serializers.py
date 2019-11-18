@@ -30,3 +30,11 @@ class GuideProfileFeedbackSerializer(serializers.ModelSerializer):
         model = GuideProfileFeedback
         fields = '__all__'
         read_only_fields = ('profile', 'published',)
+
+
+class GuidePersonalTourSerializer(serializers.ModelSerializer):
+    """Serializer for GuidePersonalTourSerializer"""
+    class Meta:
+        model = GuidePersonalTour
+        fields = '__all__'
+        read_only_fields = ('profile',)

@@ -5,7 +5,7 @@ from rest_framework.pagination import LimitOffsetPagination
 
 from .models import *
 from .serializers import *
-from .permissions import IsOwner
+from .permissions import IsOwner, IsTourOwner
 
 
 class LimitPagination(LimitOffsetPagination):
@@ -61,3 +61,49 @@ class GuideProfileFeedbackAPIView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         profile = GuideProfile.objects.get(id=self.kwargs['profile_id'])
         serializer.save(profile=profile)
+
+
+class GuidePersonalTourAPIView(generics.ListCreateAPIView):
+    """
+    Added personal for GuideProfile.
+    :param profile_id in url
+    """
+    permission_classes = (permissions.AllowAny, permissions.IsAuthenticated)
+    serializer_class = GuidePersonalTourSerializer
+    lookup_field = 'profile_id'
+
+    def get_queryset(self):
+        qs = GuidePersonalTour.objects.filter(profile_id=self.kwargs['profile_id'])
+        return qs
+
+    def create(self, request, *args, **kwargs):
+        id = self.kwargs['profile_id']
+        profile = GuideProfile.objects.get(id=id)
+        if profile.auth_user == self.request.user:
+            searialazer = self.serializer_class(data=self.request.data)
+            searialazer.is_valid(raise_exception=True)
+            self.perform_create(searialazer)
+            return Response(searialazer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response({"detail": "Can create only for self account"}, status=status.HTTP_400_BAD_REQUEST)
+
+    def perform_create(self, serializer):
+        profile = GuideProfile.objects.get(id=self.kwargs['profile_id'])
+        if profile.auth_user == self.request.user:
+            serializer.save(profile=profile)
+
+
+class GuidePersonalTourDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    """"""
+    permission_classes = (IsTourOwner,)
+    serializer_class = GuidePersonalTourSerializer
+    lookup_field = 'id'
+
+    def get_object(self):
+        id = self.kwargs['id']
+        obj = GuidePersonalTour.objects.get(id=id)
+        return obj
+
+    def get_queryset(self):
+        qs = self.get_object()
+        return qs

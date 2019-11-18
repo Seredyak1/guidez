@@ -24,6 +24,11 @@ class GuideProfileFeedbackAdmin(admin.ModelAdmin):
     readonly_fields = ('profile', 'body', 'name')
 
 
+class GuidePersonalTourAdmin(admin.ModelAdmin):
+    list_display = ('title', 'profile', 'created_at')
+
+
 admin.site.register(GuideProfile, GuideProfileAdmin)
 admin.site.register(Language, LanguageAdmin)
 admin.site.register(GuideProfileFeedback, GuideProfileFeedbackAdmin)
+admin.site.register(GuidePersonalTour, GuidePersonalTourAdmin)
