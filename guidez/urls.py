@@ -28,7 +28,7 @@ urlpatterns = [
 
     path('api-token-auth/', obtain_jwt_token),
     path('users/', include('users.urls')),
-    path('profile/', include('guide_profile.urls')),
+    path('profile/', include('profile.urls')),
     path('blogs/', include('blog.urls')),
     path('order/', include('order.urls')),
 

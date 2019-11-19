@@ -2,7 +2,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 
 from django.contrib.auth.models import User
-from guide_profile.models import GuideProfile
+from profile.models import GuideProfile
 from email_servise.email_servise import invation_email
 
 @receiver(post_save, sender=User)

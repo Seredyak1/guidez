@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'email_servise.apps.EmailServiseConfig',
     'users.apps.UsersConfig',
     'blog.apps.BlogConfig',
-    'guide_profile.apps.GuideProfileConfig',
+    'profile.apps.GuideProfileConfig',
     'order.apps.OrderConfig',
     'pages.apps.PagesConfig',
 ]

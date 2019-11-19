@@ -4,7 +4,7 @@ from jinja2 import Template
 from django.core.mail import EmailMultiAlternatives
 
 from email_servise.models import EmailTemplate
-from guide_profile.models import GuideProfile
+from profile.models import GuideProfile
 
 
 class SendEmail():
