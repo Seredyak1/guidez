@@ -73,7 +73,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     personal_description = models.TextField(null=True, blank=True)
     language = models.ManyToManyField(Language, related_name='user_languages', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     validation_image = models.ImageField(upload_to='profile_validation/', null=True, blank=True)
     profile_image = models.ImageField(upload_to=f'{str(id)}/', null=True, blank=True)
