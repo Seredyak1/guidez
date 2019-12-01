@@ -5,7 +5,7 @@ from django.conf import settings
 from email_service.models import EmailTemplate
 
 
-class SendEmail:
+class EmailSender:
     def __init__(self, send_email, template, context):
         self.email = send_email
         self.template = template
@@ -30,5 +30,5 @@ def invation_email(user):
     template = EmailTemplate.objects.get(type='confirm_email')
     context = {"name": user.get_full_name()}
     print(context)
-    mail = SendEmail([user.email], template, context).send()
+    mail = EmailSender([user.email], template, context).send()
     return mail
