@@ -30,7 +30,7 @@ class UserRegisterAPIView(generics.CreateAPIView):
         return Response({'user': out}, status=status.HTTP_201_CREATED)
 
 
-class UserProfileAPIView(generics.RetrieveUpdateDestroyAPIView):
+class UserProfileAPIView(generics.RetrieveAPIView, generics.UpdateAPIView):
     """
     Class for user profile. Avialable only for login user - else return e,pty user object.
     get:
@@ -48,9 +48,6 @@ class UserProfileAPIView(generics.RetrieveUpdateDestroyAPIView):
     def get_object(self):
         obj = User.objects.get(id=self.request.user.id)
         return obj
-
-    def delete(self, request, *args, **kwargs):
-        return Response({'detail': 'Only admin can delete user'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class AccountsListAPIView(generics.ListAPIView):
