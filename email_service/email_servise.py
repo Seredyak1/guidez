@@ -2,7 +2,7 @@ from jinja2 import Template
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 
-from email_servise.models import EmailTemplate
+from email_service.models import EmailTemplate
 
 
 class SendEmail:
