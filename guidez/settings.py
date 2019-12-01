@@ -47,12 +47,10 @@ INSTALLED_APPS = [
     'django_celery_beat',
     'django_summernote',
 
+    'accounts.apps.AccountsConfig',
     'email_servise.apps.EmailServiseConfig',
-    'users.apps.UsersConfig',
     'blog.apps.BlogConfig',
-    'profile.apps.GuideProfileConfig',
     'order.apps.OrderConfig',
-    'pages.apps.PagesConfig',
 ]
 
 MIDDLEWARE = [
@@ -85,6 +83,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'guidez.wsgi.application'
+
+AUTH_USER_MODEL = 'accounts.User'
+
+AUTHENTICATION_BACKENDS = (
+        'django.contrib.auth.backends.ModelBackend',
+)
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases

@@ -1,13 +1,11 @@
-from django.core.mail import send_mail
-from django.conf import settings
 from jinja2 import Template
 from django.core.mail import EmailMultiAlternatives
+from django.conf import settings
 
 from email_servise.models import EmailTemplate
-from profile.models import GuideProfile
 
 
-class SendEmail():
+class SendEmail:
     def __init__(self, send_email, template, context):
         self.email = send_email
         self.template = template
@@ -30,8 +28,7 @@ class SendEmail():
 
 def invation_email(user):
     template = EmailTemplate.objects.get(type='confirm_email')
-    profile = GuideProfile.objects.get(auth_user=user)
-    context = {"name": profile.get_full_name()}
+    context = {"name": user.get_full_name()}
     print(context)
     mail = SendEmail([user.email], template, context).send()
     return mail
