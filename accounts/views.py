@@ -30,7 +30,7 @@ class UserRegisterAPIView(generics.CreateAPIView):
         return Response({'user': out}, status=status.HTTP_201_CREATED)
 
 
-class UserProfileAPIView(generics.RetrieveAPIView, generics.UpdateAPIView):
+class UserProfileAPIView(generics.RetrieveUpdateAPIView):
     """
     Class for user profile. Avialable only for login user - else return e,pty user object.
     get:
