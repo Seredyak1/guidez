@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'django_summernote',
 
     'accounts.apps.AccountsConfig',
-    'email_servise.apps.EmailServiseConfig',
+    'email_service.apps.EmailServiseConfig',
     'blog.apps.BlogConfig',
     'order.apps.OrderConfig',
 ]
@@ -151,8 +151,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',],
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny',
-    ),
+        'rest_framework.permissions.AllowAny',),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 20
 }
 
 #Settings for JWT Auth

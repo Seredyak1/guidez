@@ -1,5 +1,4 @@
 # created by Seredyak1
-import json
 from rest_framework.test import APITestCase, APIClient
 
 from django.contrib.auth import get_user_model

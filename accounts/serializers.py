@@ -55,7 +55,7 @@ class AccountDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'first_name', 'last_name', 'languages', 'email', 'city', 'phone', 'date_of_birth',
-              'personal_description', 'profile_image',)
+                  'personal_description', 'profile_image',)
 
     def get_languages(self, instance):
         serializer = LanguageSerializer(instance=instance.language, many=True)

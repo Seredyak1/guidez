@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class EmailServiseConfig(AppConfig):
-    name = 'email_servise'
+    name = 'email_service'
