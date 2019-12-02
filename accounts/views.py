@@ -15,7 +15,7 @@ class UserRegisterAPIView(generics.CreateAPIView):
     """
     Class for user registration.
     create:
-    Create new use nad return his own data (without password)
+    Create new use and return his own data (without password)
     """
     permission_classes = (permissions.AllowAny,)
     serializer_class = CreateUserSerializer
