@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 
-from email_service.email_servise import invation_email
+from email_service.email_servise import confirm_email
 
 
 class Language(models.Model):
@@ -32,7 +32,7 @@ class MyUserManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
 
-        # user.send_confirm_email()
+        user.send_confirm_email()
         return user
 
     def create_user(self, email, password=None, **extra_fields):
@@ -93,4 +93,5 @@ class User(AbstractBaseUser, PermissionsMixin):
         return f"{self.first_name} {self.last_name}"
 
     def send_confirm_email(self):
-        invation_email(self)
+        """Send confirm email about success registration"""
+        confirm_email(self.email, self.get_full_name())
