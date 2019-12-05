@@ -3,7 +3,8 @@ from django.contrib.auth.admin import UserAdmin
 from django import forms
 from django.contrib.auth.models import Group
 
-from .models import User, Language
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class UserCreationForm(forms.ModelForm):
@@ -42,9 +43,3 @@ class CustomUserAdmin(UserAdmin):
 
 admin.site.register(User, CustomUserAdmin)
 admin.site.unregister(Group)
-
-
-class LanguageAdmin(admin.ModelAdmin):
-    list_display = ('__str__',)
-
-admin.site.register(Language, LanguageAdmin)
