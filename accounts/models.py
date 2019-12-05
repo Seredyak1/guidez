@@ -1,22 +1,10 @@
 import uuid
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 
-from email_service.email_servise import confirm_email
-
-
-class Language(models.Model):
-    class Meta:
-        verbose_name = 'Мова'
-        verbose_name_plural = 'Мови'
-
-    language_en = models.CharField(max_length=256, null=True, blank=True)
-    language_ru = models.CharField(max_length=256, null=True, blank=True)
-    language_ua = models.CharField(max_length=256, null=True, blank=True)
-
-    def __str__(self):
-        return self.language_en or "Language"
+from email_service.email_service import confirm_email
 
 
 class MyUserManager(BaseUserManager):
@@ -71,7 +59,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     phone = models.TextField(blank=True, null=True)
     city = models.TextField(blank=True, null=True)
     personal_description = models.TextField(null=True, blank=True)
-    language = models.ManyToManyField(Language, related_name='user_languages', null=True, blank=True)
+    language = ArrayField(models.TextField(blank=True, null=True),
+                            size=16, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
