@@ -59,7 +59,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     phone = models.TextField(blank=True, null=True)
     city = models.TextField(blank=True, null=True)
     personal_description = models.TextField(null=True, blank=True)
-    language = ArrayField(models.TextField(blank=True, null=True),
+    languages = ArrayField(models.TextField(blank=True, null=True),
                             size=16, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
