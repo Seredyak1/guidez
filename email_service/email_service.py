@@ -1,4 +1,4 @@
-from jinja2 import Template
+from django.template import Template, Context
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 
@@ -9,31 +9,34 @@ from .tasks import send_email
 class EmailSender:
     """
     Render html template with context and send it in email.
-    :param send_email: list, include email where SEND html data
+    :param to: list, include email where SEND html data
     :param title: title of email
     :param body: html data with default variables
     :param context: dict, where key=body variable, value=some data in str, int, float
     """
-    def __init__(self, send_email, title, body, context):
-        self.email = send_email
+    def __init__(self, send_emails, title, body, context):
+        self.to = [send_emails]
         self.title = title
-        self.body = body
+        self.tbody = body
         self.context = context
         self.body = self.get_body()
 
     def get_body(self):
-        """Returnrender html data, include context values"""
-        template_to_render = Template(self.body)
-        html = template_to_render.render(self.context)
+        """Return render html data, include context values"""
+        context = Context(self.context)
+        html_message = Template(self.tbody)
+        html = html_message.render(context)
         return html
 
     def send(self):
         """Send by EmailMultiAlternatives class"""
-        EmailMultiAlternatives(
+        msg = EmailMultiAlternatives(
             subject=self.title,
             body=self.body,
             from_email=settings.EMAIL_HOST_USER,
-            to=self.email,).send()
+            to=self.to,
+            alternatives=((self.body, 'text/html'),),)
+        msg.send()
 
 
 def confirm_email(email, full_name):
