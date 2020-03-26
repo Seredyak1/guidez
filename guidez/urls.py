@@ -18,19 +18,26 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework_swagger.views import get_swagger_view
-from rest_framework_jwt.views import obtain_jwt_token
+from rest_framework_simplejwt.views import TokenRefreshView
+from .customized_jwt import TokenObtainPairPatchedView
 
-schema_view = get_swagger_view(title='Pastebin API')
+swagger = get_swagger_view(title='Guidez API')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', schema_view),
 
-    path('accounts/login/', obtain_jwt_token),
+    path('accounts/login/',  TokenObtainPairPatchedView.as_view()),
+    path('accounts/refresh-token/', TokenRefreshView.as_view()),
     path('accounts/', include('accounts.urls')),
+
     path('blogs/', include('blog.urls')),
     path('order/', include('order.urls')),
 
     path('api-auth/', include('rest_framework.urls')),
     path('summernote/', include('django_summernote.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns = urlpatterns + [
+        path('', swagger),
+    ]
