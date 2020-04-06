@@ -73,4 +73,7 @@ class AccountDetailAPIView(generics.RetrieveAPIView):
     def get_object(self):
         id = self.kwargs['user_id']
         obj = User.objects.get(id=int(id))
-        return obj
+        if obj:
+            return obj
+        else:
+            return None
