@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     'accounts.apps.AccountsConfig',
     'email_service.apps.EmailServiseConfig',
+    'tours.apps.ToursConfig',
     'blog.apps.BlogConfig',
     'order.apps.OrderConfig',
 ]

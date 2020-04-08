@@ -32,6 +32,7 @@ urlpatterns = [
 
     path('blogs/', include('blog.urls')),
     path('order/', include('order.urls')),
+    path('tours/', include('tours.urls')),
 
     path('api-auth/', include('rest_framework.urls')),
     path('summernote/', include('django_summernote.urls')),
